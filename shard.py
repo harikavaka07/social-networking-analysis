@@ -16,10 +16,6 @@ class ShardServicer(social_graph_pb2_grpc.SocialGraphServicer):
         self.db_file = f"data/shard{self.shard_id}.db"
         self.conn = sqlite3.connect(self.db_file, check_same_thread=False)
         self.lock = threading.Lock()
-        # Create a bytearray (mutable buffer)
-        data = bytearray(b"Hello, Buffer!")
-        # Create a memoryview of the data
-        mv = memoryview(data)
         self._init_db()
         print(f"\n🔄 SHARD {self.shard_id} INITIALIZED | Node range: {shard_range}")
         print(f"💾 Database: {self.db_file}")
